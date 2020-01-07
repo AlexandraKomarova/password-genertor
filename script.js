@@ -1,16 +1,13 @@
-// connect to the #gen-btn
+// select html elements
     var genBtn = document.querySelector("#gen-btn");
     var result = document.querySelector("#result");
 // create arrays for characters
-    //var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     var numbers = ("123456789").split("");
     var special = ("!#$%&()*<>?:;[]{}|~@=+-.,").split("");
     var letters = ("abcdefghijklmnopqrstuvwxyz").split("");
-    var upper = [];
-
+    var upper = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
     
-    
-
+    // connect generatePassword to genBtn
     genBtn.addEventListener("click", generatePassword);
 
         // prompt user to choose password length
@@ -76,20 +73,26 @@
       function chooseAndGenerate() {
           var numbersTrue = confirm("Would you like to have numbers?");
           var lettersTrue = confirm("Would you like to have letters?");
+          var upperTrue = confirm("Would you like to have uppercased letters?");
           var specialTrue = confirm("Would you like to have special charcaters?");
           
           var possChar = [];
           var password = [];
-          if (numbersTrue === false && lettersTrue === false && specialTrue === false) {
+          if (numbersTrue === false && lettersTrue === false && upperTrue === false && specialTrue === false) {
             alert ("please choose at least one character type");
             numbersTrue = confirm("Would you like to have numbers?");
             lettersTrue = confirm("Would you like to have letters?");
+            upperTrue = confirm("Would you like to have uppercased letters?");
+            specialTrue = confirm("Would you like to have special charcaters?");
           }
           if (numbersTrue) {
             possChar = possChar.concat(numbers);
           }
           if (lettersTrue) {
             possChar = possChar.concat(letters);
+          }
+          if (upperTrue) {
+            possChar = possChar.concat(upper);
           }
           if (specialTrue) {
             possChar = possChar.concat(special);
