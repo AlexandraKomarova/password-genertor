@@ -4,7 +4,7 @@
 // create arrays for characters
     //var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     var numbers = ("123456789").split("");
-    var special = ["!#$%&()*<>?:;[]{}|~@=+-.,"].split("");
+    var special = ("!#$%&()*<>?:;[]{}|~@=+-.,").split("");
     var letters = ("abcdefghijklmnopqrstuvwxyz").split("");
     var upper = [];
 
@@ -76,10 +76,11 @@
       function chooseAndGenerate() {
           var numbersTrue = confirm("Would you like to have numbers?");
           var lettersTrue = confirm("Would you like to have letters?");
+          var specialTrue = confirm("Would you like to have special charcaters?");
           
           var possChar = [];
           var password = [];
-          if (numbersTrue === false && lettersTrue === false) {
+          if (numbersTrue === false && lettersTrue === false && specialTrue === false) {
             alert ("please choose at least one character type");
             numbersTrue = confirm("Would you like to have numbers?");
             lettersTrue = confirm("Would you like to have letters?");
@@ -90,6 +91,10 @@
           if (lettersTrue) {
             possChar = possChar.concat(letters);
           }
+          if (specialTrue) {
+            possChar = possChar.concat(special);
+          }
+
           for (var i = 0; i < length; i++) {
             var random = Math.floor(Math.random() * possChar.length);
             password.push(possChar[random]);
