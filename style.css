@@ -78,12 +78,12 @@ button:active {
     border-radius: 5px;
     align-self: center;
     justify-self: center;
-    
+    display: flex;
 }
 
 h5 {
     font-size: calc(14px + 0.3vw);
-    margin: 0 auto;
+    margin: auto;
     padding: 20px;
     word-break: break-all;
 }
