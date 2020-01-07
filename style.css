@@ -58,12 +58,17 @@ button {
     font-size: calc(14px + 0.3vw);
 }
 
-h5 {
-    font-size: calc(14px + 0.3vw);
-}
-
 button:focus{
     outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(2px);
+    
 }
 
 .password {
@@ -77,6 +82,7 @@ button:focus{
 }
 
 h5 {
+    font-size: calc(14px + 0.3vw);
     margin: 0 auto;
     padding: 20px;
     word-break: break-all;
