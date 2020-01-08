@@ -103,16 +103,15 @@ h5 {
 @media screen and (min-width: 678px) {
     .content {
         width: 70%;
-        grid-template-rows: 3fr 3fr 9fr 3fr;
+        grid-template-rows: 3fr 3fr min-content 3fr;
         grid-template-columns: 1fr 1fr 1fr;
         align-content: center;
     }
 
-    .header {
+    .header, .dec {
         grid-column: 1 / -1;
     }
     .dec {
         width: 100%;
-        grid-column: 1 / -1;
     }
 }

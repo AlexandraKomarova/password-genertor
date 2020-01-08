@@ -10,9 +10,10 @@
 
 // click genBtn to call generatePassword
   genBtn.addEventListener("click", generatePassword);
-
+  
 // wrapper function for the generation
   function generatePassword() {
+    
     //prompt user to choose password length
     var length = prompt("Choose the length of your password to be between 8 and 128 characters");
     // if user continues to click cancel or clicks ok without entering anything (while they do it) continue asking to choose a number
@@ -92,7 +93,7 @@
       /* clipboard write failed */
     });
     // clear password box after the password was copied with copyBtn
-    result.textContent = "";
+    result.textContent = "Your password was copied to clipboard";
   });
 
 // ========================= VALIDATION ==============================
