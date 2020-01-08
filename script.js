@@ -8,23 +8,23 @@
   var letters = ("abcdefghijklmnopqrstuvwxyz").split("");
   var upper = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
 
-  // var numbersTrueFunction = function() {
-  //   var bool = confirm("Would you like to have numbers?")
-  //   console.log(`#TFunc---->`, bool)
-  //   return bool
-  // }
-
 // click genBtn to call generatePassword
   genBtn.addEventListener("click", generatePassword);
 
 // wrapper function for the whole process
   function generatePassword() {
     //prompt user to choose password length
-    var length = prompt("Chose a number between 8 and 128");
-    // if user continues to click cancel (while they do it) continue asking to choose a number
-    while (length === null){
-      alert("please enter a number");
-      length = prompt("Chose a number between 8 and 128");
+    var length = prompt("Choose the length of your password to be between 8 and 128 characters");
+    // if user continues to click cancel or clicks ok without entering anything (while they do it) continue asking to choose a number
+    while (length === null || length === "") {
+      length = prompt("Please enter a number between 8 and 128");
+      console.log(length);
+    }
+    while (length < 8){
+      length = prompt("Minimum number of characters is 8. Please enter a number between 8 and 128");
+    }
+    while (length > 128){
+      length = prompt("Maximum number of characters is 128. Please enter a number between 8 and 128");
     }
     // when the length is chosen call chooseAndGenerate
     chooseAndGenerate();
@@ -68,17 +68,17 @@
           }
 
       // loop through possChar password length amount of times, pick random characters and push them into password
-          for (var i = 0; i < length; i++) {
-              var random = Math.floor(Math.random() * possChar.length);
-              password.push(possChar[random]);
-            }
+        for (var i = 0; i < length; i++) {
+            var random = Math.floor(Math.random() * possChar.length);
+            password.push(possChar[random]);
+          }
       // join characters in password and replace all commas by empty spaces
         password = password.join().replace(/,/g, "");
       // paste resulting password into result box   
         result.textContent = password;
       }
     }
-  
+
   // create copy to clipboard function
   copyBtn.addEventListener("click", function() {
     var resultPassword = document.querySelector("h5");
