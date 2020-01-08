@@ -11,7 +11,7 @@
 // click genBtn to call generatePassword
   genBtn.addEventListener("click", generatePassword);
 
-// wrapper function for the whole process
+// wrapper function for the generation
   function generatePassword() {
     //prompt user to choose password length
     var length = prompt("Choose the length of your password to be between 8 and 128 characters");
@@ -76,6 +76,8 @@
         password = password.join().replace(/,/g, "");
       // paste resulting password into result box   
         result.textContent = password;
+      // add .word-break to h5 when password gets pasted there to amke sure it wraps in case it's too long
+        result.classList.add("word-break");
       }
     }
 
@@ -89,19 +91,12 @@
     function() {
       /* clipboard write failed */
     });
+    // clear password box after the password was copied with copyBtn
+    result.textContent = "";
   });
 
 // ========================= VALIDATION ==============================
 
-// if length is less than 8 say min is 8
-// if length is more than 128 say max is 128
-
 // when password is created make sure it gets characters from each character type selected
-// include()
-
-// ============================= DOM =============================
-
-// make sure password box gets reset
-// add .word-break to h5 when password is pasted there
-
+// check password with include()?
 

@@ -84,6 +84,9 @@ h5 {
     font-size: calc(14px + 0.3vw);
     margin: auto;
     padding: 20px;
+}
+
+.word-break {
     word-break: break-all;
 }
 
