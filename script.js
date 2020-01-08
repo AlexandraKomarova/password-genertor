@@ -93,6 +93,7 @@
       /* clipboard write failed */
     });
     // clear password box after the password was copied with copyBtn
+    result.classList.remove("word-break");
     result.textContent = "Your password was copied to clipboard";
   });
 
