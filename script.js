@@ -13,6 +13,8 @@
   
 // wrapper function for the generation
   function generatePassword() {
+    // when new password is generated again revert text in the box to the original text
+    result.textContent = "Your Secure Password";
     
     //prompt user to choose password length
     var length = prompt("Choose the length of your password to be between 8 and 128 characters");
@@ -21,6 +23,7 @@
       length = prompt("Please enter a number between 8 and 128");
       console.log(length);
     }
+    // if user continues to enter wrong number of characters (while they do it) continue asking to choose a number
     while (length < 8){
       length = prompt("Minimum number of characters is 8. Please enter a number between 8 and 128");
     }
@@ -92,7 +95,7 @@
     function() {
       /* clipboard write failed */
     });
-    // clear password box after the password was copied with copyBtn
+    // change content of password box after the password was copied with copyBtn
     result.classList.remove("word-break");
     result.textContent = "Your password was copied to clipboard";
   });
