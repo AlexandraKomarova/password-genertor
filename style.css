@@ -67,8 +67,7 @@ button:hover {
 }
 
 button:active {
-    transform: translateY(2px);
-    
+    transform: translateY(2px); 
 }
 
 .password {

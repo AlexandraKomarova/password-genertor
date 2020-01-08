@@ -1,90 +1,59 @@
 // select html elements
-    var genBtn = document.querySelector("#gen-btn");
-    var result = document.querySelector("#result");
-// create arrays for characters
-    var numbers = ("123456789").split("");
-    var special = ("!#$%&()*<>?:;[]{}|~@=+-.,").split("");
-    var letters = ("abcdefghijklmnopqrstuvwxyz").split("");
-    var upper = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
-    
-    // connect generatePassword to genBtn
-    genBtn.addEventListener("click", generatePassword);
+  var genBtn = document.querySelector("#gen-btn");
+  var result = document.querySelector("#result");
+  var copyBtn = document.querySelector("#copy-btn");
+// create arrays of characters
+  var numbers = ("123456789").split("");
+  var special = ("!#$%&()*<>?:;[]{}|~@=+-.,").split("");
+  var letters = ("abcdefghijklmnopqrstuvwxyz").split("");
+  var upper = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
 
-        // prompt user to choose password length
-        // var length = prompt("Chose a number between 8 and 128");
-        // if(length === null){
-        //   alert("please enter a number");
-        //   prompt("Chose a number between 8 and 128");
-        // }
-        
-        // ask if they want numbers
-        // var numbersTrue = confirm("Would you like to have numbers?");
-        // ask if they want letters
-        // var lettersTrue = confirm("Would you like to have numbers?");
+  // var numbersTrueFunction = function() {
+  //   var bool = confirm("Would you like to have numbers?")
+  //   console.log(`#TFunc---->`, bool)
+  //   return bool
+  // }
 
-        // console.log(length)
-        // console.log(numbersTrue)
-        // console.log(lettersTrue)
+// click genBtn to call generatePassword
+  genBtn.addEventListener("click", generatePassword);
 
-        
-        
-      
-        // empty array of possible characters
-        // var possChar = [];
-        // empty array for password
-        // var password = [];
-      
-        // if numbers wanted concat numbers with possChar
-        // if (numbersTrue) {
-        //   possChar = possChar.concat(numbers);
-        // }
-        
-        //if letters wanted concat letters with possChar
-        // if (lettersTrue) {
-        //   possChar = possChar.concat(letters);
-        // }
-        
-        // loop through possChar password length amount of times, pick random characters and push them into password
-        // for (var i = 0; i < length; i++) {
-        //   var random = Math.floor(Math.random() * possChar.length);
-        //   password.push(possChar[random]);
-        // }
-        
-        // join characters in password in the password and replace all commas by empty spaces
-        // password = password.join().replace(/,/g, "");
+// wrapper function for the whole process
+  function generatePassword() {
+    //prompt user to choose password length
+    var length = prompt("Chose a number between 8 and 128");
+    // if user continues to click cancel (while they do it) continue asking to choose a number
+    while (length === null){
+      alert("please enter a number");
+      length = prompt("Chose a number between 8 and 128");
+    }
+    // when the length is chosen call chooseAndGenerate
+    chooseAndGenerate();
 
-        // result.textContent = password;
-        
-        // console.log(password);
-        //result.value = password;
-      
-
-      function generatePassword() {
-        var length = prompt("Chose a number between 8 and 128");
-        if(length === null){
-          alert("please enter a number");
-          length = prompt("Chose a number between 8 and 128")
-          chooseAndGenerate();
+    // declare chooseAndGenrate ()
+    function chooseAndGenerate() {
+      // confirm character type
+        var numbersTrue = confirm("Would you like to have numbers?");
+        var lettersTrue = confirm("Would you like to have letters?");
+        var upperTrue = confirm("Would you like to have uppercased letters?");
+        var specialTrue = confirm("Would you like to have special charcaters?");
+      // function to be used in validation
+        function chooseCharacterType(){
+          numbersTrue = confirm("Would you like to have numbers?");
+          lettersTrue = confirm("Would you like to have letters?");
+          upperTrue = confirm("Would you like to have uppercased letters?");
+          specialTrue = confirm("Would you like to have special charcaters?");
         }
-        else {
-          chooseAndGenerate();
-      }
-
-      function chooseAndGenerate() {
-          var numbersTrue = confirm("Would you like to have numbers?");
-          var lettersTrue = confirm("Would you like to have letters?");
-          var upperTrue = confirm("Would you like to have uppercased letters?");
-          var specialTrue = confirm("Would you like to have special charcaters?");
-          
-          var possChar = [];
-          var password = [];
-          if (numbersTrue === false && lettersTrue === false && upperTrue === false && specialTrue === false) {
-            alert ("please choose at least one character type");
-            numbersTrue = confirm("Would you like to have numbers?");
-            lettersTrue = confirm("Would you like to have letters?");
-            upperTrue = confirm("Would you like to have uppercased letters?");
-            specialTrue = confirm("Would you like to have special charcaters?");
-          }
+      
+      // array to push chosen possible character types into
+        var possChar = [];
+      // final array to add randomly generated elements 
+        var password = [];
+      // if user continues to click cancel (while they do it) continue asking to choose a character type
+        while (numbersTrue === false && lettersTrue === false && upperTrue === false && specialTrue === false) {
+          alert ("please choose at least one character type");
+          chooseCharacterType();
+        }
+      // concat possChar array (which is empty to start with) with arrays that user chose
           if (numbersTrue) {
             possChar = possChar.concat(numbers);
           }
@@ -98,67 +67,41 @@
             possChar = possChar.concat(special);
           }
 
+      // loop through possChar password length amount of times, pick random characters and push them into password
           for (var i = 0; i < length; i++) {
-            var random = Math.floor(Math.random() * possChar.length);
-            password.push(possChar[random]);
-          }
-          password = password.join().replace(/,/g, "");
-
-          result.textContent = password;
-        }
+              var random = Math.floor(Math.random() * possChar.length);
+              password.push(possChar[random]);
+            }
+      // join characters in password and replace all commas by empty spaces
+        password = password.join().replace(/,/g, "");
+      // paste resulting password into result box   
+        result.textContent = password;
       }
-
-// ================== PROMPTS TO CHOOSE CHARACTERS ==================
-
-// prompt the user to say chose if they want special characters
-// var special = prompt("Would you like your password to contain special characters?");
-
-// prompt the user to say chose if they want uppercase characters
-// var upper = prompt("Would you like your password to contain uppercase characters?");
+    }
+  
+  // create copy to clipboard function
+  copyBtn.addEventListener("click", function() {
+    var resultPassword = document.querySelector("h5");
+    navigator.clipboard.writeText(resultPassword.textContent)
+    .then(function() {
+      /* clipboard successfully set */
+    }, 
+    function() {
+      /* clipboard write failed */
+    });
+  });
 
 // ========================= VALIDATION ==============================
 
 // if length is less than 8 say min is 8
 // if length is more than 128 say max is 128
 
-// make sure at least one character type is selected
-// what happens when Cancel is pressed? if?
-
 // when password is created make sure it gets characters from each character type selected
+// include()
 
 // ============================= DOM =============================
 
-// display password in password box (textContent)
-// add copy to clipboard (clipboard interaction)
 // make sure password box gets reset
+// add .word-break to h5 when password is pasted there
 
-function copy() {
-  // var copyText = document.querySelector("h5");
-  // document.execCommand("copy");
-  navigator.clipboard.writeText("<empty clipboard>").then(function() {
-    /* clipboard successfully set */
-  }, function() {
-    /* clipboard write failed */
-  });
-}
-// console.log(window.navigator)
-
-document.querySelector("#copy-btn").addEventListener("click", function() {
-  var resultPassword = document.querySelector("h5");
-
-  // console.log(resultPassword)
-  navigator.clipboard.writeText(resultPassword.textContent)
-  .then(function() {
-    /* clipboard successfully set */
-    
-  }, function() {
-    /* clipboard write failed */
-  });
-  // navigator.clipboard.readText().then(
-  //   clipText => {
-  //     document.querySelector("h5").innerText = clipText
-  //   });
-
-
-});
 
